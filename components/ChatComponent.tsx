@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Loader2, SendHorizonal } from "lucide-react";
+import { Question } from "@prisma/client";
 
 export default function ChatComponent() {
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -18,15 +19,23 @@ export default function ChatComponent() {
   const [interviewComplete, setInterviewComplete] = useState(false);
 
   const { data: session } = useSession();
-  const allQAs = useRef<{ question: string; answer: string; evaluation: string }[]>([]);
+  interface QA {
+  question: string;
+  answer: string;
+  evaluation: string;
+  }
+
+   const allQAs = useRef<QA[]>([]);
+
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       const res = await fetch("/api/questions");
-      const data = await res.json();
-      const questionTexts = data.map((q: any) => q.text);
+      const data: { text: string }[] = await res.json();  // <-- Add type here instead of 'any'
+      const questionTexts = data.map(q => q.text);
       setQuestions(questionTexts);
+
     };
 
     fetchQuestions();
@@ -96,8 +105,13 @@ export default function ChatComponent() {
         throw new Error("Failed to evaluate answer");
       }
 
-      const data = await res.json();
+      interface EvaluateResponse {
+     feedback: string;
+      }
+
+      const data: EvaluateResponse = await res.json();
       return data.feedback;
+
     };
 
     try {
@@ -116,6 +130,7 @@ export default function ChatComponent() {
       if (isFinal) {
         // Save transcript
         try {
+          
           const saveResponse = await fetch("/api/save-transcript", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -127,14 +142,19 @@ export default function ChatComponent() {
             }),
           });
 
-          if (saveResponse.ok) {
-            await respondWithTyping("✅ Interview complete! The transcript has been saved successfully.");
-            setInterviewComplete(true);
-          } else {
-            const errorData = await saveResponse.json();
-            console.error("Save error:", errorData);
-            await respondWithTyping("⚠️ Interview complete, but there was an issue saving the transcript. Please contact support.");
-          }
+            interface SaveError {
+  message: string;
+           }
+
+             if (saveResponse.ok) {
+             await respondWithTyping("✅ Interview complete! The transcript has been saved successfully.");
+             setInterviewComplete(true);
+            } else {
+  const errorData: SaveError = await saveResponse.json();
+  console.error("Save error:", errorData.message);
+  await respondWithTyping("⚠️ Interview complete, but there was an issue saving the transcript. Please contact support.");
+            }
+
         } catch (saveError) {
           console.error("Save transcript error:", saveError);
           await respondWithTyping("⚠️ Interview complete, but there was an issue saving the transcript. Please contact support.");

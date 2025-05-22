@@ -1,6 +1,5 @@
 // app/layout.tsx
 import "./globals.css";
-import { Geist, Geist_Mono } from "next/font/google";
 // import Navbar from "@/components/Navbar";
 import NextAuthSessionProvider from "@/components/SessionProvider";
 
