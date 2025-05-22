@@ -1,0 +1,51 @@
+# Node dependencies
+/node_modules
+
+# Yarn/Pnpm
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+!.yarnrc.yml
+.pnpm-debug.log*
+
+# Build output
+/.next
+/out
+/build
+
+# Testing
+/coverage
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.production.local
+
+# OS files
+.DS_Store
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# Prisma
+/prisma/dev.db
+/prisma/dev.db-journal
+/migrations/
+
+# Optional: ignore seed data or large exports
+/scripts/*.dump
+/scripts/*.sql
