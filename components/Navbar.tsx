@@ -1,7 +1,8 @@
 "use client"
 
+import Image from "next/image";
 import Link from "next/link"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, LogOut, User, Zap } from "lucide-react"
@@ -9,7 +10,6 @@ import { useState, useEffect } from "react"
 
 export default function Navbar() {
   const { data: session } = useSession()
-  const router = useRouter()
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -102,11 +102,14 @@ export default function Navbar() {
                   }`}>
                     {session.user.image ? (
                       <div className="relative">
-                        <img
-                          src={session.user.image}
-                          alt={session.user.name || "User"}
-                          className="w-8 h-8 rounded-full ring-2 ring-white shadow-sm hover:ring-blue-200 transition-all duration-300"
-                        />
+                        
+                  <Image
+                   src={session.user.image}
+                    alt={session.user.name || "User"}
+                    width={32}
+                    height={32}
+                    className="rounded-full ring-2 ring-white shadow-sm hover:ring-blue-200 transition-all duration-300"
+                  />
                         <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></div>
                       </div>
                     ) : (

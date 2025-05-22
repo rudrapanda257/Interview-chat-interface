@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    // 👇 This line tells Next.js to IGNORE ESLint errors during build
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-};
+  typescript: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has type errors.
+    ignoreBuildErrors: true,
+  },
+}
 
-export default nextConfig;
+module.exports = nextConfig

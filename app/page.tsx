@@ -1,9 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { LogIn } from "lucide-react";
 import ChatComponent from "@/components/ChatComponent";
 import Navbar from "@/components/Navbar";
 
