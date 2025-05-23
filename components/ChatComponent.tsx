@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Bot, Brain, Loader2, SendHorizonal, Sparkles, User } from "lucide-react";
-import { Question } from "@prisma/client";
+import { Button } from "./ui/button";
+
 
 interface Message {
   role: "user" | "assistant";
@@ -54,7 +55,7 @@ export default function ChatComponent() {
     setMessages([
       {
         role: "assistant",
-        text: "🤖 Welcome to your weekly content strategy interview. Let's start by confirming your name and the company you're working with.",
+        text: "Welcome to your weekly content strategy interview. Let's start by confirming your name and the company you're working with.",
       },
     ]);
   }, []);
@@ -135,7 +136,7 @@ export default function ChatComponent() {
         evaluation: evaluation || "Reviewed ✅",
       });
 
-      await respondWithTyping(`🤖 ${evaluation}`);
+      await respondWithTyping(` ${evaluation}`);
 
       const isFinal = questionIndex === questions.length - 1;
 
@@ -176,7 +177,7 @@ export default function ChatComponent() {
         setQuestionIndex(nextIndex);
 
         if (nextIndex < questions.length) {
-          await respondWithTyping(`💬 ${questions[nextIndex]} ❓`);
+          await respondWithTyping(`💬 ${questions[nextIndex]} `);
         }
       }
     } catch (err) {
@@ -252,12 +253,7 @@ export default function ChatComponent() {
         className={`flex items-end space-x-3 mb-6 animate-in slide-in-from-${isUser ? 'right' : 'left'}-4 duration-500`}
         style={{ animationDelay: `${index * 100}ms` }}
       >
-        {!isUser && (
-          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25">
-            <Bot className="w-5 h-5 text-white" />
-          </div>
-        )}
-        
+  
         <div className={`max-w-[80%] ${isUser ? 'ml-auto' : ''}`}>
           <div className={`relative px-6 py-4 rounded-3xl shadow-lg transition-all duration-300 hover:shadow-xl ${
             isUser 
@@ -265,41 +261,41 @@ export default function ChatComponent() {
               : 'bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-100/50'
           }`}>
             {/* Message tail */}
-            <div className={`absolute top-4 w-0 h-0 ${
+            {/* <div className={`absolute top-4 w-0 h-0 ${
               isUser 
                 ? 'right-[-8px] border-l-[16px] border-l-blue-600 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent'
                 : 'left-[-8px] border-r-[16px] border-r-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent'
-            }`}></div>
+            }`}></div> */}
             
             <p className="text-sm leading-relaxed whitespace-pre-line font-medium">
               {message.text}
             </p>
             
             {/* Sparkle effect for AI messages */}
-            {!isUser && (
+            {/* {!isUser && (
               <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center opacity-80">
                 <Sparkles className="w-2.5 h-2.5 text-white" />
               </div>
-            )}
+            )} */}
           </div>
         </div>
         
-        {isUser && (
-          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/25">
+      
+          {/* <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/25">
             <User className="w-5 h-5 text-white" />
-          </div>
-        )}
+          </div> */}
+        
       </div>
     );
   };
 
   return (
-    <div className="bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926')] bg-cover bg-center from-blue-400 via-cyan-500 to-teal-600 pt-4 pb-1 ml-0 mr-0">
+    <div className="  bg-gradient-to-br from-blue-50 to-indigo-100  bg-cover bg-centerpt-4 pb-1 ml-0 mr-0">
       <div className="mx-2.5">
       <div className="max-w-2xl max-h-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-0 animate-in fade-in-5 slide-in-from-top-4 duration-700">
-          <div className="inline-flex items-center space-x-3 bg-white/80 backdrop-blur-sm px-8 py-1 rounded-3xl shadow-xl shadow-blue-500/10 border border-white/50 mb-4">
+          <div className="inline-flex mt-7 items-center space-x-3 bg-white/80 backdrop-blur-sm px-8 py-1 rounded-3xl shadow-xl shadow-blue-500/10 border border-white/50 mb-4">
             <div className="relative">
               <Brain className="w-8 h-10 text-blue-600" />
               <div className="absolute inset-0 bg-blue-400 rounded-full opacity-20 blur-md animate-pulse"></div>
@@ -309,7 +305,7 @@ export default function ChatComponent() {
             </h1>
             <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
           </div>
-          <p className="text-gray-300 font-medium">
+          <p className="text-gray-400 font-medium">
             Powered by advanced AI • Real-time evaluation • Professional insights
           </p>
         </div>
@@ -375,7 +371,7 @@ export default function ChatComponent() {
           <div className="flex space-x-4 mt-1">
             <div className="flex-1 relative">
               <textarea
-                className="w-full bg-gradient-to-br  bg-white-500 border-2 border-gray-200/50 rounded-2xl px-6 py-1 text-gray-100 placeholder-gray-300 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-400/20 transition-all duration-300 resize-none min-h-[60px] font-medium shadow-inner"
+                className="w-full bg-gradient-to-br  bg-white-500 border-2 border-gray-400 rounded-2xl px-6 py-1 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-400/20 transition-all duration-300 resize-none min-h-[60px] font-medium shadow-inner"
                 value={currentAnswer}
                 onChange={(e) => setCurrentAnswer(e.target.value)}
                 onKeyDown={(e) => {
@@ -384,7 +380,7 @@ export default function ChatComponent() {
                     handleAnswerSubmit();
                   }
                 }}
-                placeholder={interviewComplete ? "Interview completed! 🎉" : "✍️ Share your thoughts and insights..."}
+                placeholder={interviewComplete ? "Interview completed! 🎉" : "Share your thoughts and insights..."}
                 disabled={interviewComplete}
                 rows={2}
               />
@@ -395,27 +391,28 @@ export default function ChatComponent() {
               </div>
             </div>
             
-            <button
-              onClick={handleAnswerSubmit}
-              disabled={loading || currentAnswer.trim() === "" || interviewComplete}
-              className={`px-9 py-1 rounded-2xl font-semibold transition-all duration-300 transform active:scale-95 flex items-center space-x-3 shadow-lg ${
-                currentAnswer.trim() === "" || loading || interviewComplete
-                  ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105"
-              }`}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="animate-spin w-5 h-5" />
-                  <span>Sending</span>
-                </>
-              ) : (
-                <>
-                  <SendHorizonal className="w-5 h-5" />
-                  <span>Send</span>
-                </>
-              )}
-            </button>
+
+<Button
+  onClick={handleAnswerSubmit}
+  disabled={loading || currentAnswer.trim() === "" || interviewComplete}
+  className={`px-12 py-7 rounded-2xl font-semibold transition-all duration-300 transform active:scale-95 flex items-center space-x-3 shadow-lg ${
+    currentAnswer.trim() === "" || loading || interviewComplete
+      ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+      : "bg-gradient-to-r from-blue-700 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105"
+  }`}
+>
+  {loading ? (
+    <>
+      <Loader2 className="animate-spin w-5 h-5" />
+      <span>Sending</span>
+    </>
+  ) : (
+    <>
+      <SendHorizonal className="w-7 h-5" />
+      <span>Send</span>
+    </>
+  )}
+</Button>
           </div>
           
 

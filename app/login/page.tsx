@@ -82,7 +82,7 @@ export default function LoginPage() {
           {/* Welcome Message */}
           <div className="mb-8 space-y-2">
             <div className="flex justify-center gap-2">
-              <span className="text-4xl">👋</span>
+              <span className="text-4xl"></span>
               <Sparkles className="h-6 w-6 text-yellow-400 animate-pulse" />
             </div>
             <h2 className="text-2xl font-semibold text-white">Welcome Back</h2>
