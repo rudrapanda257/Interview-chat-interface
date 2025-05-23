@@ -309,9 +309,9 @@ export default function ChatComponent() {
             </h1>
             <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
           </div>
-          {/* <p className="text-gray-600 font-medium">
+          <p className="text-gray-300 font-medium">
             Powered by advanced AI • Real-time evaluation • Professional insights
-          </p> */}
+          </p>
         </div>
 
         {/* Thinking Banner */}
@@ -356,9 +356,9 @@ export default function ChatComponent() {
               {typing && 
               <div className="flex items-center space-x-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50 mr-auto max-w-[200px]">
                 <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                <div className="w-2 h-2 bg-blue-700 rounded-full animate-pulse" style={{ animationDelay: '0.9s' }}></div>
-                <div className="w-2 h-2 bg-blue-900 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-2 h-2 bg-blue-800 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
               </div>
                <span className="text-sm text-gray-600 font-medium">AI is thinking</span>
               </div>
@@ -424,7 +424,7 @@ export default function ChatComponent() {
 
         {/* Progress Indicator */}
         {/* <div className="mt-0 bg-white/60 backdrop-blur-xl rounded-2xl p-4 shadow-lg border border-white/50 mb-1"> */}
-        <div className="mb-0 p-9 mt-8 ">
+        <div className="mb-0 p-4 mt-8 ">
           {/* <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold text-gray-700">Interview Progress</span>
             <span className="text-sm text-gray-500">Question 3 of 10</span>
