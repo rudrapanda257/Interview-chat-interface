@@ -303,7 +303,7 @@ export default function ChatComponent() {
             <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               AI Interview Chat Interface
             </h1>
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+            {/* <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div> */}
           </div>
           <p className="text-gray-400 font-medium">
             Powered by advanced AI • Real-time evaluation • Professional insights

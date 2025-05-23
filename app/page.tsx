@@ -9,7 +9,7 @@ export default function Home() {
 
     // Show login page UI or button here
     return (
-      <main className="h-screen flex flex-col justify-center items-center ">
+      <main className="h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col justify-center items-center ">
         <Navbar/>
         <div className="mt-5"></div>
         <ChatComponent/>
