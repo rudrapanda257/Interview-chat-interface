@@ -398,7 +398,7 @@ export default function ChatComponent() {
   className={`px-12 py-7 rounded-2xl font-semibold transition-all duration-300 transform active:scale-95 flex items-center space-x-3 shadow-lg ${
     currentAnswer.trim() === "" || loading || interviewComplete
       ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-      : "bg-gradient-to-r from-blue-700 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105"
+      : "bg-gradient-to-r from-purple-600 to-blue-400 hover:from-blue-700 hover:to-purple-700 text-white shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105"
   }`}
 >
   {loading ? (
