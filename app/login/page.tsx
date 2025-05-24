@@ -26,7 +26,7 @@ export default function LoginPage() {
   }
 
   const features = [
-    { icon: Users, text: "Connect with professionals" },
+    // { icon: Users, text: "Connect with professionals" },
     // { icon: Shield, text: "Secure & private interviews" },
     // { icon: Zap, text: "Lightning-fast setup" }
   ]
@@ -73,7 +73,7 @@ export default function LoginPage() {
           <h1 className="text-4xl font-extrabold text-transparent bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text">
             Interview App
           </h1>
-          <p className="mt-2 text-sm text-gray-300">Professional Interview Platform</p>
+          {/* <p className="mt-2 text-sm text-gray-300">Professional Interview Platform</p> */}
         </div>
 
         {/* Login Card */}
@@ -86,11 +86,11 @@ export default function LoginPage() {
               <Sparkles className="h-6 w-6 text-yellow-400 animate-pulse" />
             </div>
             <h2 className="text-2xl font-semibold text-white">Welcome Back</h2>
-            <p className="text-sm text-gray-200">Sign in to access your interview dashboard and connect with opportunities</p>
+            <p className="text-sm text-gray-200">Sign in to access your interview dashboard </p>
           </div>
 
           {/* Feature Highlights */}
-          <div className="space-y-3 mb-8">
+          {/* <div className="space-y-3 mb-8">
             {features.map((feature, index) => (
               <div
                 key={index}
@@ -101,7 +101,7 @@ export default function LoginPage() {
                 <span className="text-sm text-gray-200">{feature.text}</span>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Sign In Button */}
           <Button

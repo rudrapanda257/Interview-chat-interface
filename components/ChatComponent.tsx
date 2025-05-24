@@ -306,7 +306,7 @@ export default function ChatComponent() {
             {/* <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div> */}
           </div>
           <p className="text-gray-400 font-medium">
-            Powered by advanced AI • Real-time evaluation • Professional insights
+            Powered by Claude AI • Real-time evaluation • Professional insights
           </p>
         </div>
 
@@ -331,7 +331,7 @@ export default function ChatComponent() {
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 
-                <div className="w-3 h-3 bg-red-600 rounded-full shadow-lg shadow-green-400/50 animate-pulse"></div>
+                <div className="w-2 h-2 bg-red-600 rounded-full shadow-lg shadow-green-400/50 animate-pulse"></div>
                 <span className="text-white font-semibold">Live Interview Session</span>
                 
                 </div>
