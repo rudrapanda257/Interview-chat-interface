@@ -23,7 +23,7 @@ export const authConfig: AuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }): Promise<string> {
-      return `${baseUrl}/app/interview`; // redirect to /app/interview after login
+      return `${baseUrl}/interview`; // redirect to /app/interview after login
     },
   },
 
