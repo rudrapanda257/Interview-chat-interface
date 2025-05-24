@@ -1,7 +1,7 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "@/lib/db";
-import { AuthOptions, Session, User } from "next-auth";
+import { AuthOptions, Session } from "next-auth";
 
 export const authConfig: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -16,16 +16,19 @@ export const authConfig: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET, // ✅ REQUIRED in production
 
   callbacks: {
-    // ✅ Use `token` instead of `user` for session callback
     async session({ session, token }: { session: Session; token: any }) {
       if (session.user && token.sub) {
         session.user.id = token.sub;
       }
       return session;
     },
+    async redirect({ url, baseUrl }: { url: string; baseUrl: string }): Promise<string> {
+      return `${baseUrl}/app/interview`; // redirect to /app/interview after login
+    },
   },
 
-  pages: {
-    signIn: "/login",
-  },
+  // Optional: if you have a custom login page
+  // pages: {
+  //   signIn: "/login",
+  // },
 };
