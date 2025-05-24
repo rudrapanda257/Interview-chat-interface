@@ -1,4 +1,4 @@
-// app/api/evaluate/route.ts
+
 import { NextResponse } from "next/server";
 import { callClaude } from "@/lib/anthropic";
 
@@ -8,15 +8,14 @@ export async function POST(req: Request) {
     console.log("Evaluate request body:", body);
     const { question, answer } = body;
 
-    
     if (!question || !answer) {
       return NextResponse.json({ feedback: "Invalid input" }, { status: 400 });
     }
 
     const prompt = `
-    You are a friendly content strategy coach.
+You are a friendly content strategy coach.
 
-    Evaluate the following candidate answer to the given question and give a very very short, kind, encouraging, and constructive comment.
+Evaluate the following candidate answer to the given question and give a very very short, kind, encouraging, and constructive comment.
 
 Question: "${question}"
 Answer: "${answer}"

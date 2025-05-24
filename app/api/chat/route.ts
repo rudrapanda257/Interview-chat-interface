@@ -35,3 +35,5 @@ Respond like a helpful mentor.`;
     return NextResponse.json({ error: "Failed to evaluate answer." }, { status: 500 });
   }
 }
+
+
