@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Bot, Brain, Loader2, SendHorizonal, Sparkles, User } from "lucide-react";
 import { Button } from "./ui/button";
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Textarea } from '@/components/ui/textarea'
 
 
 interface Message {
@@ -289,149 +291,116 @@ export default function ChatComponent() {
     );
   };
 
-  return (
-    <div className="  bg-gradient-to-br from-blue-50 to-indigo-100  bg-cover bg-centerpt-4 pb-1 ml-0 mr-0">
+   return (
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 pt-4 pb-1 ml-0 mr-0">
       <div className="mx-2.5">
-      <div className="max-w-2xl max-h-2xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-0 animate-in fade-in-5 slide-in-from-top-4 duration-700">
-          <div className="inline-flex mt-7 items-center space-x-3 bg-white/80 backdrop-blur-sm px-8 py-1 rounded-3xl shadow-xl shadow-blue-500/10 border border-white/50 mb-4">
-            <div className="relative">
-              <Brain className="w-8 h-10 text-blue-600" />
-              <div className="absolute inset-0 bg-blue-400 rounded-full opacity-20 blur-md animate-pulse"></div>
-            </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              AI Interview Chat Interface
-            </h1>
-            {/* <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div> */}
+        <div className="max-w-2xl max-h-2xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-4 animate-in fade-in-5 slide-in-from-top-4 duration-700">
+            <Card className="inline-flex mt-2 items-center space-x-3 px-8 py-2 rounded-3xl bg-white/80 backdrop-blur-sm shadow-xl shadow-blue-500/10 border border-white/50">
+              {/* <div className="relative">
+                <Brain className="w-8 h-10 text-blue-600" />
+                <div className="absolute inset-0 bg-blue-400 rounded-full opacity-20 blur-md animate-pulse" />
+              </div> */}
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                AI Interview Chat Interface
+              </h1>
+            </Card>
+            <p className="text-gray-400 font-medium">
+              Powered by Claude AI • Real-time evaluation • Professional insights
+            </p>
           </div>
-          <p className="text-gray-400 font-medium">
-            Powered by Claude AI • Real-time evaluation • Professional insights
-          </p>
-        </div>
 
-        {/* Thinking Banner */}
-        {thinking && (
-          <div className="mb-1 animate-in slide-in-from-top-2 duration-500">
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-2xl shadow-lg flex items-center justify-center space-x-3">
+          {/* Thinking Banner */}
+          {thinking && (
+            <Card className="mb-3 animate-in slide-in-from-top-2 duration-500 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-2xl shadow-lg flex items-center justify-center space-x-3">
               <div className="flex space-x-1">
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse delay-200"></div>
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse delay-400"></div>
               </div>
               <span className="font-semibold">🤔 Analyzing your response with Claude AI...</span>
-            </div>
-          </div>
-        )}
+            </Card>
+          )}
 
-        {/* Chat Container */}
-        <div className="relative mb-3">
-          <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl shadow-black/5 border border-white/50 overflow-hidden">
-            {/* Chat Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 flex items-center justify-between">
+          {/* Chat Section */}
+          <Card className="relative mb-4 mt-0 bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl shadow-black/5 border border-white/50 overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                
                 <div className="w-2 h-2 bg-red-600 rounded-full shadow-lg shadow-green-400/50 animate-pulse"></div>
                 <span className="text-white font-semibold">Live Interview Session</span>
-                
-                </div>
-              <div className="text-white/80 text-sm font-medium flex">
-                {messages.length} messages
-                <div className="w-1.5 h-1.5 bg-green-400 rounded-full shadow-lg shadow-green-400/50 "></div>
               </div>
-            </div>
+              <div className="text-white/80 text-sm font-medium flex items-center space-x-1">
+                <span>{messages.length} messages</span>
+                <div className="w-1.5 h-1.5 bg-green-400 rounded-full shadow-lg shadow-green-400/50"></div>
+              </div>
+            </CardHeader>
 
-            {/* Messages */}
-            <div className="h-[400px] overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-              {messages.map((message, index) => (
+            <CardContent className="h-[400px] overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+              {messages.map((message: any, index: number) => (
                 <MessageBubble key={index} message={message} index={index} />
               ))}
-              
 
               {/* AI Typing Indicator */}
-              {typing && 
-              <div className="flex items-center space-x-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50 mr-auto max-w-[200px]">
-                <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                <div className="w-2 h-2 bg-blue-800 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
-              </div>
-               <span className="text-sm text-gray-600 font-medium">AI is thinking</span>
-              </div>
-              
-              }
-              <div ref={chatEndRef} />
-            </div>
-          </div>
-        </div>
+              {typing && (
+                <div className="flex items-center space-x-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50 max-w-[200px]">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-200"></div>
+                    <div className="w-2 h-2 bg-blue-800 rounded-full animate-bounce delay-400"></div>
+                  </div>
+                  <span className="text-sm text-gray-600 font-medium">AI is thinking</span>
+                </div>
+              )}
 
-        {/* Input Section */}
-        {/* <div className="bg-white/80 backdrop-blur-xl rounded-7xl shadow-2xl shadow-black/5 border border-white/50 p-1 animate-in slide-in-from-bottom-4 duration-700"> */}
-         <div>
+              <div ref={chatEndRef} />
+            </CardContent>
+          </Card>
+
+          {/* Input Section */}
           <div className="flex space-x-4 mt-1">
             <div className="flex-1 relative">
-              <textarea
-                className="w-full bg-gradient-to-br  bg-white-500 border-2 border-gray-400 rounded-2xl px-6 py-1 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-400/20 transition-all duration-300 resize-none min-h-[60px] font-medium shadow-inner"
+              <Textarea
+                className="text-sm min-h-[60px] font-medium shadow-inner"
+                placeholder={interviewComplete ? "Interview completed! 🎉" : "Share your thoughts and insights..."}
                 value={currentAnswer}
                 onChange={(e) => setCurrentAnswer(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    handleAnswerSubmit();
+                    e.preventDefault()
+                    handleAnswerSubmit()
                   }
                 }}
-                placeholder={interviewComplete ? "Interview completed! 🎉" : "Share your thoughts and insights..."}
                 disabled={interviewComplete}
-                rows={2}
+                maxLength={500}
               />
-              
-              {/* Character counter */}
               <div className="absolute bottom-2 right-3 text-xs text-gray-400 font-medium">
                 {currentAnswer.length}/500
               </div>
             </div>
-            
 
-<Button
-  onClick={handleAnswerSubmit}
-  disabled={loading || currentAnswer.trim() === "" || interviewComplete}
-  className={`px-12 py-7 rounded-2xl font-semibold transition-all duration-300 transform active:scale-95 flex items-center space-x-3 shadow-lg ${
-    currentAnswer.trim() === "" || loading || interviewComplete
-      ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-      : "bg-gradient-to-r from-purple-600 to-blue-400 hover:from-blue-700 hover:to-purple-700 text-white shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105"
-  }`}
->
-  {loading ? (
-    <>
-      <Loader2 className="animate-spin w-5 h-5" />
-      <span>Sending</span>
-    </>
-  ) : (
-    <>
-      <SendHorizonal className="w-7 h-5" />
-      <span>Send</span>
-    </>
-  )}
-</Button>
+            <Button
+              onClick={handleAnswerSubmit}
+              disabled={loading || currentAnswer.trim() === '' || interviewComplete}
+              className="px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-semibold transition-all duration-300 transform active:scale-95 flex items-center space-x-2"
+              variant={loading || currentAnswer.trim() === '' || interviewComplete ? 'outline' : 'default'}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="animate-spin w-5 h-5 " />
+                  <span className="text-amber-50">Sending</span>
+                </>
+              ) : (
+                <>
+                  <SendHorizonal className="w-7 h-5 " />
+                  <span className="text-amber-50">Send</span>
+                </>
+              )}
+            </Button>
           </div>
-          
-
-          
         </div>
-
-        {/* Progress Indicator */}
-        {/* <div className="mt-0 bg-white/60 backdrop-blur-xl rounded-2xl p-4 shadow-lg border border-white/50 mb-1"> */}
-        <div className="mb-0 p-4 mt-8 ">
-          {/* <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-gray-700">Interview Progress</span>
-            <span className="text-sm text-gray-500">Question 3 of 10</span>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-700 ease-out shadow-sm" style={{ width: '30%' }}></div>
-          </div> */}
-        </div>
-      </div>
       </div>
     </div>
-  );
+  )
+
 }
