@@ -1,9 +1,10 @@
-import { MongoClient } from "mongodb";
+import { PrismaClient } from '@prisma/client';
 
-const uri = process.env.DATABASE_URL!;
-const options = {};
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
 
-const client = new MongoClient(uri, options);
-const clientPromise = client.connect();
+export const prisma =
+  globalForPrisma.prisma ?? new PrismaClient({ log: ['query'] });
 
-export default clientPromise;
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;

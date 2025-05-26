@@ -201,6 +201,12 @@ export default function Navbar() {
                     </div>
                   </div>
                   <Button
+                   asChild
+                   className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 active:scale-95 transition-all duration-300"
+                   >
+                   <Link href="/login">Sign In</Link>
+                  </Button>
+                  <Button
                     onClick={handleLogout}
                     variant="outline"
                     className="w-full group text-red-600 border-red-200 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300 transform hover:scale-105 active:scale-95"

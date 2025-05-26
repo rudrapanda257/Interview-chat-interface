@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { Bot, Brain, Loader2, SendHorizonal, Sparkles, User } from "lucide-react";
+import { Loader2, SendHorizonal, } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
@@ -80,7 +80,7 @@ export default function ChatComponent() {
 
     if (capturingIntro) {
       if (!userAnswer.toLowerCase().includes(" from ")) {
-        await respondWithTyping(`👋 Please introduce yourself like "I am [your name] from [company name]"`);
+        await respondWithTyping(`Please introduce yourself like "I am [your name] from [company name]"`);
         setLoading(false);
         setThinking(false);
         return;
@@ -102,7 +102,7 @@ export default function ChatComponent() {
       setCapturingIntro(false);
 
       const firstQuestion = questions[0] || "Let's begin. Tell me about your content strategy process.";
-      await respondWithTyping(`👋 Thank you, ${nameValue}. ${firstQuestion}`);
+      await respondWithTyping(`Thank you, ${nameValue}. ${firstQuestion}`);
       setLoading(false);
       setThinking(false);
       return;
@@ -135,7 +135,7 @@ export default function ChatComponent() {
       allQAs.current.push({
         question: currentQuestion,
         answer: userAnswer,
-        evaluation: evaluation || "Reviewed ✅",
+        evaluation: evaluation || "Reviewed ",
       });
 
       await respondWithTyping(` ${evaluation}`);
@@ -153,7 +153,7 @@ export default function ChatComponent() {
               name, 
               company, 
               questions: allQAs.current,
-              userId: session?.user?.id // Pass userId if available
+              userId: session?.user?.id 
             }),
           });
 
@@ -162,29 +162,29 @@ export default function ChatComponent() {
            }
 
              if (saveResponse.ok) {
-             await respondWithTyping("✅ Interview complete! The transcript has been saved successfully.");
+             await respondWithTyping(" Interview complete! The transcript has been saved successfully.");
              setInterviewComplete(true);
             } else {
              const errorData: SaveError = await saveResponse.json();
              console.error("Save error:", errorData.message);
-             await respondWithTyping("⚠️ Interview complete, but there was an issue saving the transcript. Please contact support.");
+             await respondWithTyping(" Interview complete, but there was an issue saving the transcript. Please contact support.");
             }
 
         } catch (saveError) {
           console.error("Save transcript error:", saveError);
-          await respondWithTyping("⚠️ Interview complete, but there was an issue saving the transcript. Please contact support.");
+          await respondWithTyping(" Interview complete, but there was an issue saving the transcript. Please contact support.");
         }
       } else {
         const nextIndex = questionIndex + 1;
         setQuestionIndex(nextIndex);
 
         if (nextIndex < questions.length) {
-          await respondWithTyping(`💬 ${questions[nextIndex]} `);
+          await respondWithTyping(` ${questions[nextIndex]} `);
         }
       }
     } catch (err) {
       console.error("Evaluation error:", err);
-      await respondWithTyping("⚠️ Sorry, there was an issue evaluating your response. Please try again.");
+      await respondWithTyping(" Sorry, there was an issue evaluating your response. Please try again.");
     }
 
     setLoading(false);
@@ -224,26 +224,6 @@ export default function ChatComponent() {
   }, [messages, typing]);
 
 
-  // const TypingIndicator = () => (
-  // <div className="flex items-center space-x-2 px-6 py-4 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50 mr-auto max-w-[200px]">
-  //   <div className="flex items-center space-x-1">
-  //     <div 
-  //       className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
-  //     ></div>
-  //     <div 
-  //       className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-  //       style={{ animationDelay: '0.1s' }}
-  //     ></div>
-  //     <div 
-  //       className="w-2 h-2 bg-blue-600 rounded-full animate-bounce"
-  //       style={{ animationDelay: '0.2s' }}
-  //     ></div>
-  //   </div>
-  //   <span className="text-sm text-gray-600 font-medium">AI is thinking</span>
-  // </div>
-  //  );
-
-  
  
 
   const MessageBubble: React.FC<MessageBubbleProps> = ({ message, index }) => {
@@ -255,41 +235,20 @@ export default function ChatComponent() {
         className={`flex items-end space-x-3 mb-6 animate-in slide-in-from-${isUser ? 'right' : 'left'}-4 duration-500`}
         style={{ animationDelay: `${index * 100}ms` }}
       >
-  
-        <div className={`max-w-[80%] ${isUser ? 'ml-auto' : ''}`}>
+       <div className={`max-w-[80%] ${isUser ? 'ml-auto' : ''}`}>
           <div className={`relative px-6 py-4 rounded-3xl shadow-lg transition-all duration-300 hover:shadow-xl ${
             isUser 
               ? 'bg-gradient-to-br from-blue-600 to-purple-600 text-white ml-auto' 
               : 'bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-100/50'
-          }`}>
-            {/* Message tail */}
-            {/* <div className={`absolute top-4 w-0 h-0 ${
-              isUser 
-                ? 'right-[-8px] border-l-[16px] border-l-blue-600 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent'
-                : 'left-[-8px] border-r-[16px] border-r-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent'
-            }`}></div> */}
-            
+          }`}> 
             <p className="text-sm leading-relaxed whitespace-pre-line font-medium">
               {message.text}
             </p>
-            
-            {/* Sparkle effect for AI messages */}
-            {/* {!isUser && (
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center opacity-80">
-                <Sparkles className="w-2.5 h-2.5 text-white" />
-              </div>
-            )} */}
-          </div>
-        </div>
-        
-      
-          {/* <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/25">
-            <User className="w-5 h-5 text-white" />
-          </div> */}
-        
-      </div>
-    );
-  };
+           </div>
+         </div> 
+       </div>
+      );
+     };
 
    return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 pt-4 pb-1 ml-0 mr-0">
