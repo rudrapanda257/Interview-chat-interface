@@ -1,5 +1,3 @@
-// app/api/transcripts/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
@@ -18,11 +16,11 @@ interface TranscriptWithUser {
 
 export async function GET(req: NextRequest) {
   try {
-    console.log("🔍 Fetching transcripts...");
+    console.log(" Fetching transcripts...");
     
     // Check database connection
     await prisma.$connect();
-    console.log("✅ Database connected");
+    console.log(" Database connected");
 
     // Check if DATABASE_URL is set
     if (!process.env.DATABASE_URL) {
@@ -36,7 +34,7 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    console.log(`📄 Found ${transcripts.length} transcripts`);
+    console.log(` Found ${transcripts.length} transcripts`);
 
     // If no transcripts found, return empty array
     if (transcripts.length === 0) {
@@ -75,10 +73,10 @@ export async function GET(req: NextRequest) {
           },
         });
 
-        console.log(`✅ Processed transcript ${transcript.id}`);
+        console.log(`Processed transcript ${transcript.id}`);
         
       } catch (userError) {
-        console.warn(`⚠️ Failed to fetch user for transcript ${transcript.id}:`, userError);
+        console.warn(`Failed to fetch user for transcript ${transcript.id}:`, userError);
         
         // Add transcript with fallback user data
         transcriptsWithUsers.push({
@@ -96,7 +94,7 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    console.log(`🎉 Successfully processed ${transcriptsWithUsers.length} transcripts`);
+    console.log(`Successfully processed ${transcriptsWithUsers.length} transcripts`);
 
     return NextResponse.json({ 
       success: true, 
@@ -105,7 +103,7 @@ export async function GET(req: NextRequest) {
     });
 
   } catch (err) {
-    console.error("❌ Error fetching transcripts:", err);
+    console.error("Error fetching transcripts:", err);
 
     // Detailed error logging
     if (err instanceof Error) {
@@ -142,6 +140,6 @@ export async function GET(req: NextRequest) {
   } finally {
     // Disconnect from database
     await prisma.$disconnect();
-    console.log("🔌 Database disconnected");
+    console.log(" Database disconnected");
   }
 }

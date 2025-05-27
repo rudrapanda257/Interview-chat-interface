@@ -1,4 +1,3 @@
-// ✅ /app/api/questions/route.ts
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 

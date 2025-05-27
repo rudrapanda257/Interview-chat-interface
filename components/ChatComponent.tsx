@@ -18,8 +18,6 @@ interface MessageBubbleProps {
   index: number;
 }
 
-
-
 export default function ChatComponent() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState<string[]>([]);
@@ -47,7 +45,7 @@ export default function ChatComponent() {
   useEffect(() => {
     const fetchQuestions = async () => {
       const res = await fetch("/api/questions");
-      const data: { text: string }[] = await res.json();  // <-- Add type here instead of 'any'
+      const data: { text: string }[] = await res.json(); 
       const questionTexts = data.map(q => q.text);
       setQuestions(questionTexts);
 
@@ -62,7 +60,7 @@ export default function ChatComponent() {
     ]);
   }, []);
 
-  // Auto-scroll to bottom when new messages appear
+  
   useEffect(() => {
     if (chatEndRef.current) {
       chatEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -91,7 +89,7 @@ export default function ChatComponent() {
       const companyValue = companyInput.join(" ").trim();
 
       if (!nameValue || !companyValue) {
-        await respondWithTyping(`❗Please enter both name and company in the format "I am [your name] from [company name]"`);
+        await respondWithTyping(` Please enter both name and company in the format "I am [your name] from [company name]"`);
         setLoading(false);
         setThinking(false);
         return;
@@ -143,7 +141,6 @@ export default function ChatComponent() {
       const isFinal = questionIndex === questions.length - 1;
 
       if (isFinal) {
-        // Save transcript
         try {
           
           const saveResponse = await fetch("/api/save-transcript", {
@@ -216,20 +213,13 @@ export default function ChatComponent() {
     });
   };
 
- 
-
-
    useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, typing]);
 
-
- 
-
   const MessageBubble: React.FC<MessageBubbleProps> = ({ message, index }) => {
     const isUser = message.role === 'user';
     
-
   return (
       <div
         className={`flex items-end space-x-3 mb-6 animate-in slide-in-from-${isUser ? 'right' : 'left'}-4 duration-500`}
@@ -257,12 +247,8 @@ export default function ChatComponent() {
           {/* Header */}
           <div className="text-center mb-4 animate-in fade-in-5 slide-in-from-top-4 duration-700">
             <Card className="inline-flex mt-2 items-center space-x-3 px-8 py-2 rounded-3xl bg-white/80 backdrop-blur-sm shadow-xl shadow-blue-500/10 border border-white/50">
-              {/* <div className="relative">
-                <Brain className="w-8 h-10 text-blue-600" />
-                <div className="absolute inset-0 bg-blue-400 rounded-full opacity-20 blur-md animate-pulse" />
-              </div> */}
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                AI Interview Chat Interface
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent pb-0.5">
+                Content Strategy Interview
               </h1>
             </Card>
             <p className="text-gray-400 font-medium">
@@ -278,7 +264,7 @@ export default function ChatComponent() {
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse delay-200"></div>
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse delay-400"></div>
               </div>
-              <span className="font-semibold">🤔 Analyzing your response with Claude AI...</span>
+              <span className="font-semibold"> Analyzing your response with Claude AI...</span>
             </Card>
           )}
 
@@ -287,7 +273,7 @@ export default function ChatComponent() {
             <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-red-600 rounded-full shadow-lg shadow-green-400/50 animate-pulse"></div>
-                <span className="text-white font-semibold">Live Interview Session</span>
+                <span className="text-white font-semibold">Live Interview </span>
               </div>
               <div className="text-white/80 text-sm font-medium flex items-center space-x-1">
                 <span>{messages.length} messages</span>
@@ -318,10 +304,10 @@ export default function ChatComponent() {
 
           {/* Input Section */}
           <div className="flex space-x-4 mt-1">
-            <div className="flex-1 relative">
+            <div className="flex-1 relative z-10">
               <Textarea
-                className="text-sm min-h-[60px] font-medium shadow-inner"
-                placeholder={interviewComplete ? "Interview completed! 🎉" : "Share your thoughts and insights..."}
+                className="text-sm min-h-[60px] font-medium shadow-inner bg-gray-100"
+                placeholder={interviewComplete ? "Interview completed! " : "Share your thoughts and insights..."}
                 value={currentAnswer}
                 onChange={(e) => setCurrentAnswer(e.target.value)}
                 onKeyDown={(e) => {
@@ -340,8 +326,8 @@ export default function ChatComponent() {
 
             <Button
               onClick={handleAnswerSubmit}
-              disabled={loading || currentAnswer.trim() === '' || interviewComplete}
-              className="px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-semibold transition-all duration-300 transform active:scale-95 flex items-center space-x-2"
+              // disabled={loading || currentAnswer.trim() === '' || interviewComplete}
+              className="px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-semibold transition-all duration-300 transform active:scale-95 flex items-center space-x-2 cursor-pointer"
               variant={loading || currentAnswer.trim() === '' || interviewComplete ? 'outline' : 'default'}
             >
               {loading ? (
@@ -361,5 +347,4 @@ export default function ChatComponent() {
       </div>
     </div>
   )
-
 }

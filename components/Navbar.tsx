@@ -14,7 +14,6 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20
@@ -57,7 +56,6 @@ export default function Navbar() {
           <div className={`flex items-center justify-between transition-all duration-300 ease-in-out ${
             scrolled ? 'h-14' : 'h-16'
           }`}>
-            {/* Logo with enhanced styling */}
             <div className="flex-shrink-0">
               <Link 
                 href="/interview" 
@@ -228,8 +226,6 @@ export default function Navbar() {
       onClick={() => setMobileOpen(false)}
       aria-hidden="true"
       />
-
-      {/* Spacer to prevent content from going under fixed navbar */}
       <div className="h-8"></div>
     </>
   )

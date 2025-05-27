@@ -1,4 +1,3 @@
-// lib/auth.ts
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "@/lib/db";
@@ -30,27 +29,19 @@ export const authConfig: AuthOptions = {
     },
     
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }): Promise<string> {
-      // Handle OAuth callback properly
       if (url.startsWith("/")) return `${baseUrl}${url}`;
       
-      // If it's a callback URL on the same origin, allow it
       try {
         if (new URL(url).origin === baseUrl) return url;
       } catch (error) {
-        // If URL parsing fails, default to baseUrl
         console.log("URL parsing error:", error);
       }
-      
-      // For successful sign-in, redirect to interview page
       if (url === baseUrl) return `${baseUrl}/interview`;
       
       return baseUrl;
     },
   },
-  
-  // Enable debug to see detailed logs
   debug: true,
-  
   pages: {
     signIn: "/login",
     error: "/auth/error",

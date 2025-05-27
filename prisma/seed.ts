@@ -13,12 +13,12 @@ async function main() {
   for (const q of questions) {
     await prisma.question.create({ data: q });
   }
-  console.log('✅ Questions seeded successfully!');
+  console.log(' Questions seeded successfully!');
 }
 
 main()
   .catch((e) => {
-    console.error('❌ Error seeding questions:', e);
+    console.error(' Error seeding questions:', e);
     process.exit(1);
   })
   .finally(async () => {

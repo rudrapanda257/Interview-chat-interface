@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { Calendar, Building2, User, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -90,7 +89,7 @@ export default function TranscriptPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-90 to-indigo-100 flex items-center justify-center ">
         <div className="text-center">
-          <div className="text-red-500 text-xl mb-4">⚠️ Error</div>
+          <div className="text-red-500 text-xl mb-4"> Error</div>
           <p className="text-gray-600">{error}</p>
         </div>
       </div>
@@ -104,8 +103,8 @@ export default function TranscriptPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            📋 Interview Transcripts
+          <h1 className="text-4xl font-bold text-gray-800 mb-2 mt-2">
+             Interview Transcripts
           </h1>
           <p className="text-gray-600">
             View all content strategy interview transcripts
@@ -120,7 +119,7 @@ export default function TranscriptPage() {
         {/* Transcripts List */}
         {transcripts.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-6xl mb-4">📝</div>
+            <div className="text-6xl mb-4">.</div>
             <h3 className="text-xl font-semibold text-gray-700 mb-2">
               No transcripts found
             </h3>
@@ -194,7 +193,7 @@ export default function TranscriptPage() {
                     <div className="border-t border-gray-200">
                       <div className="p-6 bg-gray-50/50">
                         <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                          💬 Interview Transcript
+                           Interview Transcript
                         </h3>
                         
                         <div className="space-y-6">
